@@ -263,7 +263,7 @@ if __name__ == "__main__":
        Group: Avishag Tamssut id-326275609
                Merav Hashta id-214718405
                Sahar Emmuna id-213431133
-       Git: 
+       Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
        Name: Avishag Tamssut 326275609
        """
 
