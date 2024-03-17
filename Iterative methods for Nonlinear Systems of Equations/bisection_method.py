@@ -51,11 +51,35 @@ def bisection_method(f, a, b, tol=1e-6):
 
     return c  # return the current root
 
+def iterative_method(f, x0, tol=1e-6, max_iter=100):
+    """
+    פונקציה זו מממשת שיטת איטרציות פשוטה לפתרון משוואות באמצעות הנוסחה Xr+1=f(Xr)+Xr.
+
+    :param f: הפונקציה f(x).
+    :param x0: ערך ראשוני כלשהו ל־x.
+    :param tol: דיוק מבוקש לתוצאה.
+    :param max_iter: מספר מקסימלי של איטרציות.
+    :return: הערך הקרוב ביותר לנקודת האפס.
+    """
+    x = x0
+    for k in range(max_iter):
+        x_new = f(x) + x
+        if abs(x_new - x) < tol:
+            #print(f"Iteration {k}: x = {x}, f(x) = {f(x)}, x_new = {x_new}")
+            return x_new
+        #print(f"Iteration {k}: x = {x}, f(x) = {f(x)}, x_new = {x_new}")
+        x = x_new
+    return None  # לא מצליח למצוא אפס תוך מספר האיטרציות המקסימל
 
 
 if __name__ == '__main__':
-    f = lambda x: x**2 - 4 * math.sin(x)
+    f = lambda x: math.cos(x)  # פונקציית הדוגמה: f(x) = cos(x)
     roots = bisection_method(f, 1, 3)
     print(bcolors.OKBLUE, f"\nThe equation f(x) has an approximate root at x = {roots}",bcolors.ENDC,)
 
 
+f = lambda x: math.cos(x)  # פונקציית הדוגמה: f(x) = cos(x)
+root_it = iterative_method(f, 0)  # מחפשים את האפס כשהתחלת האיטרציה היא ב־0.5
+print(bcolors.OKBLUE, f"\nIterative method equation f(x) has an approximate root at x = {root_it}", bcolors.ENDC, )
+
+#print("f(root):", f(root))
