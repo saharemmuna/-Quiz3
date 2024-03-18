@@ -67,7 +67,6 @@ def find_l(A):
 
     return l
 
-
 def find_d(A):
     n = A.shape[0]
     d = np.zeros_like(A)
@@ -76,7 +75,6 @@ def find_d(A):
         d[i, i] = A[i, i]
 
     return d
-
 
 def add_matrices(A, B):
     size_A = A.shape
@@ -92,7 +90,6 @@ def add_matrices(A, B):
         for j in range(cols):
             sum_mat[i][j] = A[i][j] + B[i][j]
     return sum_mat
-
 
 def matrix_multiply(A, B):
     if len(A[0]) != len(B):
@@ -245,6 +242,7 @@ def G_norm(matrix):
     print("G_norm = " + str(G_norm))
     if(G_norm < 1):
         return True
+
     return False
 
 if __name__ == '__main__':
@@ -259,6 +257,9 @@ if __name__ == '__main__':
     A = np.array([[2, 3, 4, 5, 6], [-5, 3, 4, -2, 3], [4, -5, -2, 2, 6], [4, 5, -1, -2, -3], [5, 5, 3, -3, 5]])
     b = np.array([70, 20, 26, -12, 37])
     X0 = np.zeros_like(b)
-
-    solution =gauss_seidel(A, b, X0)
-    print(bcolors.OKBLUE,"\nApproximate solution:", solution, bcolors.ENDC)
+    if(G_norm(A)):
+        solution =gauss_seidel(A, b, X0)
+        print(bcolors.OKBLUE, "\nApproximate solution:", solution, bcolors.ENDC)
+        G_norm(A)
+    else:
+        print("Does not converge, you need to look for another method")
