@@ -267,23 +267,17 @@ if __name__ == "__main__":
        Name: Avishag Tamssut 326275609
        """
 
-    A = np.array([[3, -1, 1], [0, 1, -1], [1, 1, -2]])
-    b = np.array([4, -1, -3])
+    A = np.array([[2, 3, 4, 5, 6], [-5, 3, 4, -2, 3], [4, -5, -2, 2, 6], [4, 5, -1, -2, -3], [5, 5, 3, -3, 5]])
+    b = np.array([70, 20, 26, -12, 37])
 
     x = np.zeros_like(b, dtype=np.double)
     solution = jacobi_iterative(A, b, x)
 
     print(bcolors.OKBLUE,"\nApproximate solution:", solution, bcolors.ENDC)
     #----------------------------us-----------------------------
-    A = np.array([[5, 1, 2],
-                  [1, 6, 4],
-                  [0, 3, 8]])
-    b = np.array([[1],
-                  [2],
-                  [3]])
-    Xr = np.array([[0],
-                   [0],
-                   [0]])
+    A = np.array([[2, 3, 4, 5, 6], [-5, 3, 4, -2, 3], [4, -5, -2, 2, 6], [4, 5, -1, -2, -3], [5, 5, 3, -3, 5]])
+    b = np.array([70, 20, 26, -12, 37])
+    Xr = np.array([0,0,0,0,0])
 
     jacobi_GH(A)
 
@@ -299,7 +293,7 @@ else:
 
 print(bcolors.OKBLUE, "jacobi solution:\n", bcolors.ENDC + str(Xr) + "\n")
 
-if (G_norm(A)):
-    print("condition for convergence is met ")
-else:
-    print("No convergence condition is met")
+#if (G_norm(A)):
+    #print("condition for convergence is met ")
+#else:
+    #print("No convergence condition is met")

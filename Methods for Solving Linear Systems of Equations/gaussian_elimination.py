@@ -78,7 +78,14 @@ def backward_substitution(mat):
 
 
 if __name__ == '__main__':
-
+    """"
+           Date: 18/3/24
+           Group: Avishag Tamssut id-326275609
+                   Merav Hashta id-214718405
+                   Sahar Emmuna id-213431133
+           Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
+           Name: Avishag Tamssut 326275609
+           """
     A_b = [[1, -1, 2, -1, -8],
         [2, -2, 3, -3, -20],
         [1, 1, 1, 0, -2],
