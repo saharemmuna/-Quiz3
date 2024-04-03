@@ -19,7 +19,6 @@ def gaussianElimination(mat):
     return backward_substitution(mat)
 
 
-
 def forward_substitution(mat):
     N = len(mat)
     for k in range(N):

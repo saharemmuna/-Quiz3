@@ -79,7 +79,7 @@ if __name__ == '__main__':
                Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
                Name: Avishag Tamssut 326275609
                """
-    f = lambda x: (5*x**3 + x**2 + 2) / (2*x - 5)
+    f = lambda x: (5*x**3 + 1*x**2 + 2) / (2*x - 5)
     a = -3
     b = 0
 

@@ -15,22 +15,30 @@ def lagrange_interpolation(x_data, y_data, x):
     """
     n = len(x_data)
     result = 0.0
+    expression = ""
 
     for i in range(n):
         term = y_data[i]
+        expression_term = str(y_data[i])
         for j in range(n):
             if i != j:
                 term *= (x - x_data[j]) / (x_data[i] - x_data[j])
+                expression_term += " * ( (x - " + str(x_data[j]) + ")  / (" + str(x_data[i]) + " - " + str(x_data[j]) + ") )"
         result += term
+        if i == 0:
+            expression +=" (" +expression_term
+        else:
+            expression += ") +( " + expression_term
 
-    return result
+    expression += ")"
+    print(bcolors.OKGREEN, "\nInterpolating polynomial P(x) =", expression, bcolors.ENDC)
+
+    return result, expression
 
 if __name__ == '__main__':
 
     x_data = [1, 2, 5]
     y_data = [1, 0, 2]
     x_interpolate = 3  # The x-value where you want to interpolate
-    y_interpolate = lagrange_interpolation(x_data, y_data, x_interpolate)
+    y_interpolate, p = lagrange_interpolation(x_data, y_data, x_interpolate)
     print(bcolors.OKBLUE, "\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate, bcolors.ENDC)
-
-
