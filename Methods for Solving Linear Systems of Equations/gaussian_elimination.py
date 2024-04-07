@@ -82,7 +82,7 @@ if __name__ == '__main__':
                    Merav Hashta id-214718405
                    Sahar Emmuna id-213431133
            Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
-           Name: Avishag Tamssut 326275609
+           Name: Sahar Emmuna id-213431133
            """
     A_b = [[2, 3, 4, 5, 6, 70],
                     [-5, 3, 4, -2, 3, 20],

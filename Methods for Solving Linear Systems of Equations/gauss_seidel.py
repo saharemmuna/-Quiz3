@@ -2,6 +2,7 @@ from numpy.linalg import norm
 from matrix_utility import row_addition_elementary_matrix, scalar_multiplication_elementary_matrix, is_diagonally_dominant
 import numpy as np
 from colors import bcolors
+from gaussian_elimination import gaussianElimination, forward_substitution, backward_substitution
 
 
 def norma(mat):
@@ -257,9 +258,20 @@ if __name__ == '__main__':
     A = np.array([[2, 3, 4, 5, 6], [-5, 3, 4, -2, 3], [4, -5, -2, 2, 6], [4, 5, -1, -2, -3], [5, 5, 3, -3, 5]])
     b = np.array([70, 20, 26, -12, 37])
     X0 = np.zeros_like(b)
-    if(G_norm(A)):
-        solution =gauss_seidel(A, b, X0)
-        print(bcolors.OKBLUE, "\nApproximate solution:", solution, bcolors.ENDC)
-        G_norm(A)
+
+    A_b = [[2, 3, 4, 5, 6, 70],
+           [-5, 3, 4, -2, 3, 20],
+           [4, -5, -2, 2, 6, 26],
+           [4, 5, -1, -2, -3, -12],
+           [5, 5, 3, -3, 5, 37]]
+
+
+
+    if (G_norm(A) == 0):
+        result = gaussianElimination(A_b)
+        print(bcolors.OKBLUE,
+              "The norm is large 1 (the gauss seidel method will not work) the solution using the gaussian Elimination method: ",
+              result, bcolors.ENDC)
     else:
-        print("Does not converge, you need to look for another method")
+        solution = gauss_seidel(A, b, X0)
+        print(bcolors.OKBLUE, "\nApproximate solution:", solution, bcolors.ENDC)

@@ -15,6 +15,8 @@ def neville(x_data, y_data, x_interpolate):
             tableau[i][j] = ((x_interpolate - x_data[i + j]) * tableau[i][j - 1] -
                              (x_interpolate - x_data[i]) * tableau[i + 1][j - 1]) / (x_data[i] - x_data[i + j])
 
+        print("P (", i, n - 1, ") = ", tableau[i][j])
+
     return tableau[0][n - 1]
 
 if __name__ == '__main__':
