@@ -46,5 +46,5 @@ if __name__ == '__main__':
     print(bcolors.OKBLUE,"Approximate integral:", result, bcolors.ENDC)
     x = sp.symbols('x')
     f_e = math.e ** (x ** 2)
-    #error_t(f_e, 0, 1, 1, 2)
+    error_t(f_e, 0, 1, 1, 2)
 
