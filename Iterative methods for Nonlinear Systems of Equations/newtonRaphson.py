@@ -1,5 +1,6 @@
 from colors import bcolors
-
+import sympy as sp
+from sympy.utilities.lambdify import lambdify
 
 def newton_raphson(f, df, p0, TOL, N=50):
     print("{:<10} {:<15} {:<15} ".format("Iteration", "po", "p1"))
@@ -40,5 +41,5 @@ if __name__ == '__main__':
     print("my_func: ", my_f)  # my_func:  x**3 + 2*x + 5
     my_f1 = sp.diff(my_f, x)  # Derivation of my_f by x
     print("f' : ", my_f1)  # print my_f1
-    '''
+'''
 

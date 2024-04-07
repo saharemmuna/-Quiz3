@@ -1,5 +1,7 @@
+"""
 import jacobi_utilities
 from sympy import *
+import numpy as np
 
 x = Symbol('x')
 
@@ -19,6 +21,7 @@ def natural_cubic_spline(f, x0):
     m.append(0)
     for i in range(1, len(f)):
         m.append(1 - g[i])
+
 
     d = list()
     d.append(0)  # d0=0
@@ -87,12 +90,118 @@ def natural_cubic_spline(f, x0):
         f[loc][0]) + " so:")
     print("s" + str(loc - 1) + "(" + str(x0) + ") = " + str(float(s.subs(x, x0))))
 
+def natural_cubics_spline(f, x0, df=None):
+    lengh = len(f)
+    h = list()
+    for i in range(len(f) - 1):
+        h.append(f[i + 1][0] - f[i][0])
+    A = np.zeros((len(f), len(f)))
+    b=np.zeros(len(f))
+    for i in range (len(f)):
+        for j in range (len(f)):
+            if i==0 :
+                if df is not None:
+                    A[0][0] = 1/3 * h[0]
+                    A[0][1] = 1/6 * h[0]
+                    b[0] = (f[1][1]-f[0][1]) / h[0] - df[0]
+                else:
+                    A[0][0] = 1
+                    b[0] =0
+
+
+            if i == len(f)-1 :
+                if df is not None:
+                    A[i][i-1] = 1/6 * h[i-1]
+                    A[i][i] = 1/3 * h[i-1]
+                    b[i] = df[1] - (f[i][1]-f[i-1][1]) / h[i-1]
+
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
-    f = [(1, 1), (2, 2), (3, 1), (4, 1.5), (5, 1)]
-    x0 = 6
+    f = [(1, 1), (2, 0), (5, 2)]
+
+    x0 = 3
+
 
     print("func: " + str(f))
     print("x0 = " + str(x0) + "\n")
     natural_cubic_spline(f, x0)
+
+"""
+from jacobi_utilities import *
+from sympy import *
+from matrix_utility import *
+import numpy as np
+
+x = Symbol('x')
+
+
+
+
+def CubicSpline(tableValue, X, Ftag = None):
+    size = len(tableValue)
+    matrix = np.zeros((size, size))
+    b = np.zeros(size)
+    h = [tableValue[i+1][0] - tableValue[i][0] for i in range(size - 1)]
+    if Ftag == None:
+        matrix[0][0] = 1
+        b[0] = 0
+        matrix[-1][-1] = 1
+        b[-1] = 0
+    else:
+        matrix[0][0] = 1/3 * h[0]
+        matrix[0][1] = 1/6 * h[0]
+        b[0] = (tableValue[1][1] - tableValue[0][1]) - Ftag[0]
+        matrix[-1][-1] = 1/6 * h[-1]
+        matrix[-1][-2] = 1/3 * h[-1]
+        b[-1] = Ftag[1] - ((tableValue[-1][1] - tableValue[-2][1])/ h[-1])
+    for i in range(1, size - 1):
+        for j in range(i - 1, min(i + 2, size)):
+            if i != j:
+                matrix[i][j] = 1/6 * h[i - 1]
+            else:
+                matrix[i][j] = 1/3 * (h[i - 1] + h[i])
+        b[i] = ((tableValue[i+1][1] - tableValue[i][1]) / h[i]) - ((tableValue[i][1] - tableValue[i-1][1])/h[i-1])
+    matrixNew = np.hstack((matrix, b.reshape(-1, 1)))
+    matrixSol = gaussianElimination(matrixNew)
+    sum = 0
+    S_Func = 0
+    x = Symbol('x')
+    print(np.array(matrixSol))
+    for i in range(size - 1):
+        #print(tableValue[i+1][1])
+        #print(matrixSol[i + 1])
+        sum += ((tableValue[i+1][1] * (x - tableValue[i][0]))/h[i])
+        sum -= (tableValue[i][1] * (x - tableValue[i+1][0])/h[i])
+        sum += ((matrixSol[i+1]/6) * ((((x - tableValue[i][0])**3)/h[i]) - h[i] * (x - tableValue[i][0])))
+        sum -= (matrixSol[i]/6) * ((((x - tableValue[i+1][0])**3)/h[i]) - (h[i] * (x - tableValue[i+1][0])))
+        print("s" + str(i) + "(x) = " + str(sum))
+        S_Func += sum
+        sum = 0
+    print("S=", S_Func)
+    s = lambdify(x, S_Func)
+    print("------The sol------")
+    print(s(3))
+
+
+
+
+
+if __name__ == '__main__':
+    f = [(1, 1), (2, 2), (3, 1), (4, 1.5), (5, 1)]
+    x0 = 2
+    print("func: " + str(f))
+    print("x0 = " + str(x0) + "\n")
+    CubicSpline(f, x0)
+
 
