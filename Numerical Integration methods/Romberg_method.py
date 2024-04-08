@@ -4,7 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sp
 from sympy.utilities.lambdify import lambdify
-
+import math
+from colors import bcolors
+import sympy as sp
 
 def romberg_integration(func, a, b, n):
     """
@@ -36,6 +38,8 @@ def romberg_integration(func, a, b, n):
 
         for j in range(1, i + 1):
             R[i, j] = R[i, j - 1] + (R[i, j - 1] - R[i - 1, j - 1]) / ((4 ** j) - 1)
+
+        if(i==n-2 or i==n-1):
             print("i=", i - 1, "j=", j - 1, R[i - 1, j - 1])
 
     return R[n - 1, n - 1]
@@ -62,14 +66,14 @@ def calc_error(a, b, n):
     print(f"Error in {x0} is: " + str(E_x0))
 
 def f(x):
-    return 1/(2+x ** 4)
+    return math.sin(x**2 + 5*x + 6) / (2 * math.e**(-x))
 
 
 if __name__ == '__main__':
 
-    a = 0
-    b = 1
-    n = 5
+    a = 4.1
+    b = 2.7
+    n = 12
     integral = romberg_integration(f, a, b, n)
 
     print( f" Division into n={n} sections ")

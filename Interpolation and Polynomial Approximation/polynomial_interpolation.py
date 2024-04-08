@@ -27,7 +27,7 @@ def gaussianElimination(mat):
 
 # if matrix is non-singular:
     forward_substitution_to_diagonal(mat)
-    print(np.array(mat))
+    #print(np.array(mat))
     # get solution to system using backward substitution
     return backward_substitution(mat)
 
@@ -35,14 +35,14 @@ def polynomialInterpolation(matrix,table_points, x):
 
     b = [[point[1]] for point in table_points]
     matrixNew = np.hstack((matrix, b))
-    print(bcolors.OKBLUE, "The matrix obtained from the points: ", bcolors.ENDC,'\n', np.array(matrix))
-    print(bcolors.OKBLUE, "\nb vector: ", bcolors.ENDC,'\n',np.array(b))
+    #print(bcolors.OKBLUE, "The matrix obtained from the points: ", bcolors.ENDC,'\n', np.array(matrix))
+    #print(bcolors.OKBLUE, "\nb vector: ", bcolors.ENDC,'\n',np.array(b))
     matrixSol = gaussianElimination(matrixNew)
     if matrixSol is not None:
-        print(bcolors.OKBLUE, "\nResult Gauss: ", bcolors.ENDC, '\n', np.array(matrixSol))
+        #print(bcolors.OKBLUE, "\nResult Gauss: ", bcolors.ENDC, '\n', np.array(matrixSol))
         result = sum([matrixSol[i] * (x ** i) for i in range(len(matrixSol))])
-        print(bcolors.OKBLUE, "\nThe polynom:", bcolors.ENDC)
-        print('P(X) = '+'+'.join([ '('+str(matrixSol[i])+') * x^' + str(i) + ' ' for i in range(len(matrixSol))]))
+        #print(bcolors.OKBLUE, "\nThe polynom:", bcolors.ENDC)
+        #print('P(X) = '+'+'.join([ '('+str(matrixSol[i])+') * x^' + str(i) + ' ' for i in range(len(matrixSol))]))
         print(bcolors.OKGREEN, f"\nThe Result of P(X={x}) is:", bcolors.ENDC)
         print(result)
         return result
@@ -56,19 +56,29 @@ def Prerequisite(table_points):
     return matrix
 
 if __name__ == '__main__':
-
+    """"
+               Date: 8/4/24
+               Group: Avishag Tamssut id-326275609
+                       Merav Hashta id-214718405
+                       Sahar Emmuna id-213431133
+               Git: https://github.com/Avishagtams/Numerical-Analysis-Quiz2.git
+               Name: Sahar Emmuna id-213431133
+               """
     print(bcolors.OKBLUE, "----------------- Interpolation & Extrapolation Methods -----------------", bcolors.ENDC)
-    table_points = [(1, 3), (2, 4), (3, -1)]
-    x = 1.5
+    table_points = [(0.2, 3.7241), (0.35, 3.9776), (0.45, 4.0625), (0.6, 2.9776), (0.75, 3.7241)]
+    x = 0.4
+    x2 = 0.65
     matrix = Prerequisite(table_points)
     if matrix is not None:
-        print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
-        print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x,'')
+        #print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
+        #print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x,'')
         if polynomialInterpolation(matrix, table_points, x) is None:
             print(" Singular Matrix")
         print(bcolors.OKBLUE, "---------------------------------------------------------------------------", bcolors.ENDC)
-
-
+        if polynomialInterpolation(matrix, table_points, x2) is None:
+            print(" Singular Matrix")
+        print(bcolors.OKBLUE, "---------------------------------------------------------------------------",
+              bcolors.ENDC)
 
 '''
 from colors import bcolors

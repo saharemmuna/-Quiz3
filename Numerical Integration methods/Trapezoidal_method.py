@@ -35,15 +35,15 @@ def error_t(f_e, a, b, error,n):
 
 
 
-
-
-
-
 if __name__ == '__main__':
-    f = lambda x: math.e ** (x ** 2 )
-    result = trapezoidal_rule(f, 0, 1, 2)
+    f = lambda x: math.sin(x**2 + 5*x + 6) / (2 * math.e**(-x))
+    result = trapezoidal_rule(f, 4.1, 2.7, 999)
+    result2 = trapezoidal_rule(f, 4.1, 2.7, 1000)
+    result = round(result, 5)
+    result2 = round(result2, 5)
     print("-----------------------------------------------------")
     print(bcolors.OKBLUE,"Approximate integral:", result, bcolors.ENDC)
+    print(result2)
     x = sp.symbols('x')
     f_e = math.e ** (x ** 2)
     error_t(f_e, 0, 1, 1, 2)

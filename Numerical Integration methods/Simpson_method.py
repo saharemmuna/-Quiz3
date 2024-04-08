@@ -56,10 +56,10 @@ def error_s(f_s, a, b, error,n):
 
 
 if __name__ == '__main__':
-    f = lambda x: math.e ** (x ** 2)
-    n = 2
-    a=0
-    b=1
+    f = lambda x: math.sin(x ** 2 + 5 * x + 6) / (2 * math.e ** (-x))
+    a=2.7
+    b=4.1
+    n=130
     print( f" Division into n={n} sections ")
     integral = simpsons_rule(f, 0, 1, n)
     print(bcolors.OKBLUE, f"Numerical Integration of definite integral in range [{a},{b}] is {integral}", bcolors.ENDC)

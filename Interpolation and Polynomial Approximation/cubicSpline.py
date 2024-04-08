@@ -49,16 +49,16 @@ def spline(f, x0):
                 matrix[i][j-1] = h0/6
                 matrix[i][j+1] = h1/6
 
-    print(np.array(matrix))
+    #print(np.array(matrix))
 
     solution = gaussianElimination(matrix)
 
-    if isinstance(solution, str):
-        print(solution)
-    else:
-        print(bcolors.OKBLUE, "\nSolution for the system:")
-        for x1 in solution:
-            print("{:.6f}".format(x1))
+    #if isinstance(solution, str):
+        #print(solution)
+    #else:
+        #print(bcolors.OKBLUE, "\nSolution for the system:")
+        #for x1 in solution:
+            #print("{:.6f}".format(x1))
 
 
 
@@ -68,9 +68,9 @@ def spline(f, x0):
         h_i = f[i+1][0] - f[i][0]
         S_list[i] = ((f[i+1][1] * (x-f[i][0]))/h_i - (f[i][1] * (x-f[i+1][0]))/h_i
                                + solution[i+1]/6 * (((x-f[i][0]) ** 3)/h_i - h_i * (x-f[i][0])) -
-                               solution[i]/6 * (((x-f[i+1][0]) ** 3)/h_i - h_i * (x-f[i+1][0])))
+                                 solution[i]/6 * (((x-f[i+1][0]) ** 3)/h_i - h_i * (x-f[i+1][0])))
 
-        print("s" + str(i) + "(x) = " + str(S_list[i]))
+        #print("s" + str(i) + "(x) = " + str(S_list[i]))
 
     print_xo(f,S_list,x0)
 
@@ -81,9 +81,12 @@ def spline(f, x0):
 
 
 def calc_im_spline():
-    f = [(1, 1), (2, 2), (3, 1), (4, 1.5), (5, 1)]
-    x0 = 4.5
-    spline(f, 4)
+    f = [(0.2, 3.7241), (0.35, 3.9776), (0.45, 4.0625), (0.6, 2.9776), (0.75, 3.7241)]
+    x0 = 0.4
+    x2 = 0.65
+    spline(f, x0)
+    spline(f, x2)
+
 
 
 
